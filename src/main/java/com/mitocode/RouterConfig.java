@@ -1,5 +1,11 @@
 package com.mitocode;
 
+import static org.springframework.web.reactive.function.server.RequestPredicates.DELETE;
+import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
+import static org.springframework.web.reactive.function.server.RequestPredicates.PUT;
+import static org.springframework.web.reactive.function.server.RouterFunctions.route;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -8,25 +14,8 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import com.mitocode.handler.CursoHandler;
 import com.mitocode.handler.EstudianteHandler;
 import com.mitocode.handler.MatriculaHandler;
-import com.mitocode.handler.PlatoHandler;
-
-import static org.springframework.web.reactive.function.server.RouterFunctions.route;
-import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
-import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
-import static org.springframework.web.reactive.function.server.RequestPredicates.PUT;
-import static org.springframework.web.reactive.function.server.RequestPredicates.DELETE;
 @Configuration
 public class RouterConfig {
-
-	@Bean
-	public RouterFunction<ServerResponse> rutas(PlatoHandler handler) {
-		return route(GET("/v3/platos"), handler::listar)// request -> handler.listar(request)
-				.andRoute(GET("/v3/platos/{id}"), handler::listarPorId)
-				.andRoute(POST("/v3/platos"), handler::registrar)
-				.andRoute(PUT("/v3/platos"), handler::modificar)
-				.andRoute(DELETE("/v3/platos/{id}"), handler::eliminar);
-
-	}
 	
 	@Bean
 	public RouterFunction<ServerResponse> rutasEstudiante(EstudianteHandler handler) {
